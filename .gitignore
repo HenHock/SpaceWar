@@ -1,0 +1,134 @@
+# ============================================
+# Unity
+# ============================================
+
+SpaceWar/[Ll]ibrary/
+SpaceWar/[Tt]emp/
+SpaceWar/[Oo]bj/
+SpaceWar/[Bb]uild*/
+SpaceWar/[Bb]uilds/
+SpaceWar/[Ll]ogs/
+SpaceWar/UserSettings/
+SpaceWar/MemoryCaptures/
+SpaceWar/Recordings/
+SpaceWar/SysInfo/
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.pidb.meta
+
+# Cache & Generated
+SpaceWar/[Aa]ssets/AssetStoreTools*
+SpaceWar/[Aa]ssets/StreamingAssets/aa/*
+SpaceWar/[Aa]ssets/AddressableAssetsData/*/build/*
+SpaceWar/[Aa]ssets/AddressableAssetsData/*/bin/*
+SpaceWar/[Aa]ssets/AddressableAssetsData/*/*.bin*
+
+# Auto-generated files
+ExportedObj/
+*.unitypackage
+
+# ============================================
+# Visual Studio / Rider / JetBrains
+# ============================================
+
+SpaceWar/.vs/
+SpaceWar/.idea/
+*.sln.iml
+*.user
+*.userprefs
+*.suo
+*.tmp
+*.bak
+*.swp
+*.lock
+
+# ============================================
+# OS / System
+# ============================================
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+.nfs*
+
+# ============================================
+# Build output
+# ============================================
+
+# Android
+.gradle/
+*.apk
+*.aab
+*.keystore
+
+# WebGL
+[Bb]uilds/WebGL*/Release/
+[Bb]uilds/WebGL*/Development/
+[Bb]uilds/WebGL*/
+
+# iOS
+DerivedData/
+*.xccheckout
+*.xcuserstate
+*.xcuserdata/
+*.xcworkspace/
+
+# ============================================
+# Unity Cloud Build
+# ============================================
+
+/[Uu]nityCloud/
+unityLibrary/
+Crashlytics/
+
+# ============================================
+# Other tools
+# ============================================
+
+# JetBrains Rider logs
+SpaceWar/.idea/.idea.log
+
+# VSCode
+SpaceWar/.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Package managers
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ============================================
+# Local settings / Temporary
+# ============================================
+
+*.local
+*.cache
+*.log
+*.orig
+*.diff
+*.patch
+*.bak
+*.old
+
+# ============================================
+# End of file
+# ============================================
