@@ -38,14 +38,26 @@ ExportedObj/
 
 SpaceWar/.vs/
 SpaceWar/.idea/
+SpaceWar/ExportedObj/
+SpaceWar/.consulo/
 *.sln.iml
-*.user
-*.userprefs
-*.suo
-*.tmp
 *.bak
 *.swp
 *.lock
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
 
 # ============================================
 # OS / System
