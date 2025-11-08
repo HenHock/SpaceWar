@@ -1,3 +1,7 @@
+using Project.Infrastructure.Services.AssetManagement.Configs;
+using Project.Logic.Player;
+using Project.Logic.Player.Data;
+
 namespace Project.Infrastructure.Services.AssetManagement.AssetBundles.GameplayBundles
 {
     /// <summary>
@@ -7,10 +11,12 @@ namespace Project.Infrastructure.Services.AssetManagement.AssetBundles.GameplayB
     {
         public override void Load()
         {
+            AddConfig<PlayerConfig>(AssetPaths.PlayerConfig);
         }
 
         public override void Unload()
         {
+            RemoveConfig<PlayerConfig>();
         }
     }
 }

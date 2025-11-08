@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b617100f171645279bec46125a7cd1b6, type: 3}
+  m_Name: PlayerConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Logic.Player.Data.PlayerConfig
+  Prefab: {fileID: 7701319724479291798, guid: de90e8e4f5d19e54b9d8ae35731a5da1, type: 3}
+  MoveSpeed: 20
+  BulletPrefab: {fileID: 6636734333560335377, guid: 980506971a3572f489dbd74cb51bbd67, type: 3}
+  ShootCooldown: 0.5
