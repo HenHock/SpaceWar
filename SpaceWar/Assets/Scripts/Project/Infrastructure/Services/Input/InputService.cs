@@ -1,6 +1,5 @@
 ﻿using UniRx;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Project.Infrastructure.Services.Input
 {
@@ -14,7 +13,10 @@ namespace Project.Infrastructure.Services.Input
         public InputService()
         {
             _gameInputAction = new GameInputAction();
-            _gameInputAction.Player.Shoot.performed += HandleShootPressed;
+
+            Observable.EveryUpdate()
+                .Where(IsShootPressed)
+                .Subscribe(HandleShootPressed);
             
             EnableInputs();
         }
@@ -29,9 +31,11 @@ namespace Project.Infrastructure.Services.Input
             _gameInputAction.Disable();
         }
 
-        private void HandleShootPressed(InputAction.CallbackContext context)
+        private void HandleShootPressed(long _)
         {
             OnShootPressed.Execute();
         }
+
+        private bool IsShootPressed(long arg) => _gameInputAction.Player.Shoot.IsPressed();
     }
 }

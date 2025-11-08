@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4455856570772835533}
   - component: {fileID: 8843760996447040492}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rendere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8289504301113716513}
-  m_Layer: 0
+  - component: {fileID: 5114627475570161879}
+  - component: {fileID: 5224026579626110462}
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,3 +124,27 @@ Transform:
   - {fileID: 4455856570772835533}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5114627475570161879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7701319724479291798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad17ac581e84d6c90437e52ce22e2d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Logic.Player.PlayerMovement
+--- !u!114 &5224026579626110462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7701319724479291798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39fdd5d5dbd5440f908ef1a9f9abcb1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Logic.Player.PlayerShooter

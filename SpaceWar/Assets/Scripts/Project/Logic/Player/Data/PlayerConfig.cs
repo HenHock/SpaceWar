@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NaughtyAttributes;
+using UnityEngine;
 
 namespace Project.Logic.Player.Data
 {
@@ -10,11 +11,11 @@ namespace Project.Logic.Player.Data
         
         [Header("Movement")]
         public float MoveSpeed = 5f;
-        
+
         [Header("Shooting")]
-        public GameObject BulletPrefab;
-        
-        [Space]
         public float ShootCooldown = 0.5f;
+        
+        [HorizontalLine, Expandable]
+        public BulletConfig BulletConfig;
     }
 }

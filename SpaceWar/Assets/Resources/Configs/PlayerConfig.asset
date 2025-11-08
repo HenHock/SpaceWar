@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Project.Logic.Player.Data.PlayerConfig
   Prefab: {fileID: 7701319724479291798, guid: de90e8e4f5d19e54b9d8ae35731a5da1, type: 3}
   MoveSpeed: 20
-  BulletPrefab: {fileID: 6636734333560335377, guid: 980506971a3572f489dbd74cb51bbd67, type: 3}
   ShootCooldown: 0.5
+  BulletConfig: {fileID: 11400000, guid: be80e3519a1145045a43d35a72e86d12, type: 2}
