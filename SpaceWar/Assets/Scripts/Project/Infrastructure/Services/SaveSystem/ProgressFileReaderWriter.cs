@@ -3,6 +3,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Project.Extensions;
 using Project.Infrastructure.Services.SaveSystem.Data;
+using Project.Infrastructure.Services.SaveSystem.StaticData;
 using UnityEngine;
 using ILogger = Project.Infrastructure.Logger.ILogger;
 
@@ -47,7 +48,10 @@ namespace Project.Infrastructure.Services.SaveSystem
                     BinaryFormatter formatter = new();
                     using (var fileStream = File.Open(_filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
                     {
-                        return formatter.Deserialize(fileStream) as GameProgress;
+                        var gameProgress = formatter.Deserialize(fileStream) as GameProgress;
+                        this.Log($"Loaded progress from file: {SaveStaticData.ProgressFilePath}");
+                        
+                        return gameProgress;
                     }
                 }
                 catch (Exception ex)

@@ -9,18 +9,25 @@ namespace Project.Logic.Player
 {
     public class PlayerMovement : MonoBehaviour
     {
+#if UNITY_EDITOR
         [ShowNativeProperty] 
         private Vector2 MoveInput => _inputService?.MoveInput ?? Vector2.zero;
+#endif
         
-        private Camera _camera;
-        private PlayerConfig _playerConfig;
         private IInputService _inputService;
+        
+        private float _speed;
+        private Camera _camera;
 
         [Inject]
-        private void Construct(IInputService inputService, IReadAssetContainer assetContainer)
+        private void Construct(IInputService inputService)
         {
             _inputService = inputService;
-            _playerConfig = assetContainer.GetConfig<PlayerConfig>();
+        }
+
+        public void Initialize(float speed)
+        {
+            _speed = speed;
         }
 
         private void Start()
@@ -31,7 +38,7 @@ namespace Project.Logic.Player
         private void Update()
         {
             var direction = new Vector3(MoveInput.x, MoveInput.y, 0);
-            transform.Translate(_playerConfig.MoveSpeed * Time.deltaTime * direction);
+            transform.Translate(_speed * Time.deltaTime * direction);
 
             if (_camera != null && _camera.orthographic)
             {

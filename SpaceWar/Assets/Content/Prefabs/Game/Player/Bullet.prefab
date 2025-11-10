@@ -100,9 +100,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6949751268775982817}
   - component: {fileID: 7474678831190950262}
-  - component: {fileID: 8340291362150720696}
-  - component: {fileID: 863522713420927393}
-  - component: {fileID: 140630363735240591}
+  - component: {fileID: 4289025303847415864}
+  - component: {fileID: 8022524631521784454}
+  - component: {fileID: 6290140625580858809}
   m_Layer: 6
   m_Name: Bullet
   m_TagString: Untagged
@@ -120,7 +120,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.45, y: 0.45, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4983828424012098225}
@@ -139,22 +139,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c9fb33552a04a97a328fc5c179a1783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Logic.Player.BulletBrain
-  bulletCollision: {fileID: 8340291362150720696}
-  bulletLifeTime: {fileID: 863522713420927393}
---- !u!114 &8340291362150720696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7112274062835012041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37e8fbe2d4944196bb8a57ffecd139f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Project.Logic.Player.BulletCollision
   triggerObserver: {fileID: 6691288650255758423}
---- !u!114 &863522713420927393
+  bulletLifeTime: {fileID: 4289025303847415864}
+  bullerMovement: {fileID: 6290140625580858809}
+  damageableBehavior: {fileID: 8022524631521784454}
+--- !u!114 &4289025303847415864
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,10 +152,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7112274062835012041}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c4925c0b84d4914b0043bcbd4143c1d, type: 3}
+  m_Script: {fileID: 11500000, guid: d04f126f9dd0468b808f322de5fd6f34, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Project.Logic.Player.BulletLifeTimeCircle
---- !u!114 &140630363735240591
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Logic.Behavior.LifeTimeBehavior
+--- !u!114 &8022524631521784454
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -175,9 +164,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 7112274062835012041}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e99410560d5406abbfedca40b47a697, type: 3}
+  m_Script: {fileID: 11500000, guid: 27b8b8462a7e497194461862dd4b2bbd, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Project.Logic.Player.BulletMovement
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Logic.Behavior.TagTriggerBehavior
+  triggerObserver: {fileID: 6691288650255758423}
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 128
+--- !u!114 &6290140625580858809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7112274062835012041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1657d2bb65b14201912c9f84838dc951, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Logic.Behavior.LinerMoveBehavior
 --- !u!1 &7979513746684399579
 GameObject:
   m_ObjectHideFlags: 0

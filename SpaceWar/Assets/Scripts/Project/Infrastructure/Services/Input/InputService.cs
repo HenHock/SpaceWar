@@ -5,7 +5,7 @@ namespace Project.Infrastructure.Services.Input
 {
     public sealed class InputService : IInputService
     {
-        public ReactiveCommand OnShootPressed { get; } = new();
+        public Subject<Unit> OnShootPressed { get; } = new();
         public Vector2 MoveInput => _gameInputAction.Player.Move.ReadValue<Vector2>(); 
         
         private readonly GameInputAction _gameInputAction;
@@ -33,7 +33,7 @@ namespace Project.Infrastructure.Services.Input
 
         private void HandleShootPressed(long _)
         {
-            OnShootPressed.Execute();
+            OnShootPressed.OnNext(Unit.Default);
         }
 
         private bool IsShootPressed(long arg) => _gameInputAction.Player.Shoot.IsPressed();

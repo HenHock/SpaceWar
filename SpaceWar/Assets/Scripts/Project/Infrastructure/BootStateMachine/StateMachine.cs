@@ -4,7 +4,6 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
 using Project.Extensions;
-using Project.Infrastructure.BootStateMachine.States;
 using Project.Infrastructure.BootStateMachine.States.Interfaces;
 using UniRx;
 using UnityEngine;
@@ -40,7 +39,7 @@ namespace Project.Infrastructure.BootStateMachine
             this.Log($"Entered in {newState?.GetType().Name} state");
             newState?.Enter();
         }
-
+        
         public void Enter<TState, TPayload>(TPayload payload = default) where TState : class, IPayloadState<TPayload>
         {
             TState state = ChangeState<TState>();
@@ -54,7 +53,7 @@ namespace Project.Infrastructure.BootStateMachine
         private TState ChangeState<TState>() where TState : class, IExitableState
         {
             _currentState.Value?.Exit();
-            
+
             if (CurrentState.Value != null) 
                 this.Log($"Exited from {CurrentState.Value.GetType().Name} state");
 

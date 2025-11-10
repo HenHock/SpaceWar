@@ -11,7 +11,7 @@ namespace Project.Infrastructure.Services.Input
         /// </summary>
         Vector2 MoveInput { get; }
 
-        ReactiveCommand OnShootPressed { get; }
+        Subject<Unit> OnShootPressed { get; }
 
         void EnableInputs();
         void DisableInputs();

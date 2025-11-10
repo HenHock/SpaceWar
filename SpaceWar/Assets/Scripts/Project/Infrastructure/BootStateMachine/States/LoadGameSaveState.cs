@@ -1,4 +1,6 @@
+using Project.Infrastructure.BootStateMachine.States.Gameplay;
 using Project.Infrastructure.BootStateMachine.States.Interfaces;
+using Project.Infrastructure.BootStateMachine.States.Menu;
 using Project.Infrastructure.Services.SaveSystem;
 
 namespace Project.Infrastructure.BootStateMachine.States
@@ -23,6 +25,6 @@ namespace Project.Infrastructure.BootStateMachine.States
             Next();
         }
 
-        public void Next() => _stateMachine.Enter<LoadGameplayState>();
+        public void Next() => _stateMachine.Enter<LoadMenuState>();
     }
 }

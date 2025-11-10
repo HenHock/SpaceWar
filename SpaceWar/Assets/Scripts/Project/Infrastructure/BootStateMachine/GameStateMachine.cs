@@ -5,7 +5,7 @@ namespace Project.Infrastructure.BootStateMachine
     /// <summary>
     /// Global state machine that switch states of the game.
     /// Binding in the project context to be available globally.
-    /// GameBootstrapper class full this state machine by states. 
+    /// <see cref="GameBootstrapper"/> class fill this state machine by states. 
     /// </summary>
     public class GameStateMachine : StateMachine, IGameStateMachine
     {

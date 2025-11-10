@@ -2,11 +2,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
+using System.Runtime.Serialization; // added
 
 namespace AYellowpaper.SerializedCollections
 {
     [System.Serializable]
-    public class SerializedDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
+    public class SerializedDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver, ISerializable // added ISerializable
     {
         [SerializeField]
         internal List<SerializedKeyValuePair<TKey, TValue>> _serializedList = new List<SerializedKeyValuePair<TKey, TValue>>();
@@ -59,6 +60,22 @@ namespace AYellowpaper.SerializedCollections
         public SerializedDictionary(IEqualityComparer<TKey> comparer) : base(comparer) { }
         public SerializedDictionary(int capacity) : base(capacity) { }
         public SerializedDictionary(int capacity, IEqualityComparer<TKey> comparer) : base(capacity, comparer) { }
+        
+        // Serialization constructor for BinaryFormatter / ISerializable support
+        protected SerializedDictionary(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+            try
+            {
+                _serializedList = (List<SerializedKeyValuePair<TKey, TValue>>)info.GetValue("_serializedList", typeof(List<SerializedKeyValuePair<TKey, TValue>>));
+            }
+            catch (SerializationException)
+            {
+                // Fallback: rebuild from current dictionary contents if list not present
+                _serializedList = new List<SerializedKeyValuePair<TKey, TValue>>();
+                foreach (var kv in this)
+                    _serializedList.Add(new SerializedKeyValuePair<TKey, TValue>(kv.Key, kv.Value));
+            }
+        }
         
         [Conditional("UNITY_EDITOR")]
         private void SyncDictionaryToBackingField_Editor()
@@ -171,6 +188,13 @@ namespace AYellowpaper.SerializedCollections
             foreach (var kvp in this)
                 _serializedList.Add(new SerializedKeyValuePair<TKey, TValue>(kvp.Key, kvp.Value));
 #endif
+        }
+
+        // ISerializable implementation to persist custom backing list during .NET serialization scenarios
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue("_serializedList", _serializedList, typeof(List<SerializedKeyValuePair<TKey, TValue>>));
         }
     }
 }

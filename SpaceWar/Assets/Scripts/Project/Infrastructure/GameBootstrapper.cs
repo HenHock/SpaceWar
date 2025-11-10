@@ -2,6 +2,8 @@ using Project.Extensions;
 using Project.Infrastructure.BootStateMachine;
 using Project.Infrastructure.BootStateMachine.StateFactory;
 using Project.Infrastructure.BootStateMachine.States;
+using Project.Infrastructure.BootStateMachine.States.Gameplay;
+using Project.Infrastructure.BootStateMachine.States.Menu;
 using Zenject;
 using UnityEngine;
 using ILogger = Project.Infrastructure.Logger.ILogger;
@@ -34,8 +36,12 @@ namespace Project.Infrastructure
 
             _gameStateMachine.RegisterState(_stateFactory.Create<BootstrapState>());
             _gameStateMachine.RegisterState(_stateFactory.Create<LoadGameSaveState>());
+            
+            _gameStateMachine.RegisterState(_stateFactory.Create<LoadMenuState>());
+            _gameStateMachine.RegisterState(_stateFactory.Create<MenuLoopState>());
+            
             _gameStateMachine.RegisterState(_stateFactory.Create<LoadGameplayState>());
-            _gameStateMachine.RegisterState(_stateFactory.Create<LoopGameplayState>());
+            _gameStateMachine.RegisterState(_stateFactory.Create<GameplayLoopState>());
 
             this.Log("Initialized GameStateMachine");
 

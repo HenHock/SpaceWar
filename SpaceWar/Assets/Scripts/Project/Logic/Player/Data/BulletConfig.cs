@@ -8,7 +8,8 @@ namespace Project.Logic.Player.Data
         public GameObject Prefab;
         
         [Space]
-        public float LifeTime;
-        public float MoveSpeed;
+        public float Damage = 1;
+        public float MoveSpeed = 40;
+        public float LifeTime = 0.8f;
     }
 }

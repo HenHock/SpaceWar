@@ -51,7 +51,6 @@ namespace Project.Infrastructure.Services.SaveSystem
             else
             {
                 _progressService.Progress = loaded;
-                this.Log($"Loaded progress from file: {SaveStaticData.ProgressFilePath}");
             }
         }
 
