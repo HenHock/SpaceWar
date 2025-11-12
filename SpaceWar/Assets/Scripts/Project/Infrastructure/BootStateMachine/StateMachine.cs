@@ -32,6 +32,11 @@ namespace Project.Infrastructure.BootStateMachine
             _registeredState.Add(key, state);
         }
 
+        public void UnregisterState<TState>()
+        {
+            _registeredState.Remove(typeof(TState));
+        }
+
         public void Enter<TState>() where TState : class, IState
         {
             TState newState = ChangeState<TState>();

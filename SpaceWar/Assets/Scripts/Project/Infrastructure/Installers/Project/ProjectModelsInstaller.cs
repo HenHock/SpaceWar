@@ -1,4 +1,4 @@
-﻿using Project.Infrastructure.Models;
+﻿using Project.Services.LevelServices.LevelChanger.Model;
 using Zenject;
 
 namespace Project.Infrastructure.Installers.Project
@@ -11,7 +11,7 @@ namespace Project.Infrastructure.Installers.Project
         }
 
         private void BindGameplayModel() => Container
-            .BindInterfacesAndSelfTo<GameplayModel>()
+            .BindInterfacesAndSelfTo<LevelSetupModel>()
             .FromNew()
             .AsSingle();
     }

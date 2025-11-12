@@ -8,22 +8,19 @@ namespace Project.Services.LevelServices.Factory
 {
     public class LevelFactory : ILevelFactory
     {
-        private readonly SceneContextRegistry _registry;
+        private readonly IInstantiator _instantiator;
         private readonly IReadAssetContainer _assetContainer;
 
         private GameObject _player;
-        private IInstantiator _instantiator;
 
-        public LevelFactory(SceneContextRegistry registry, IReadAssetContainer assetContainer)
+        public LevelFactory(IInstantiator instantiator, IReadAssetContainer assetContainer)
         {
-            _registry = registry;
+            _instantiator = instantiator;
             _assetContainer = assetContainer;
         }
 
-        public void CreateLevel(int levelIndex)
+        public void CreateLevel()
         {
-            _instantiator = GetSceneInstantiator();
-            
             _player = SpawnPlayer();
         }
 
@@ -38,7 +35,5 @@ namespace Project.Services.LevelServices.Factory
 
             return _instantiator.InstantiatePrefab(playerConfig.Prefab, new Vector3(0, minY), Quaternion.identity, null);
         }
-
-        private IInstantiator GetSceneInstantiator() => _registry.GetContainerForScene(SceneManager.GetActiveScene());
     }
 }

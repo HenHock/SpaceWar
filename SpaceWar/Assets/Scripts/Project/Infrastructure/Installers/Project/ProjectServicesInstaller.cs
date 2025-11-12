@@ -3,13 +3,12 @@ using Project.Infrastructure.BootStateMachine;
 using Project.Infrastructure.BootStateMachine.StateFactory;
 using Project.Infrastructure.Services.AssetManagement;
 using Project.Infrastructure.Services.AssetManagement.Data;
-using Project.Infrastructure.Services.Factories;
 using Project.Infrastructure.Services.Input;
 using Project.Infrastructure.Services.SaveSystem;
 using Project.Infrastructure.Services.SaveSystem.PersistentProgressService;
 using Project.Infrastructure.Services.SceneLoader;
-using Project.Services.LevelServices.Factory;
 using Project.Services.LevelServices.LevelChanger;
+using Project.Services.LevelServices.LevelProgression;
 using Project.Services.LevelServices.LevelSettingsProvider;
 using UnityEngine;
 using Zenject;
@@ -34,15 +33,14 @@ namespace Project.Infrastructure.Installers.Project
             BindSaveLoadService();
             BindStateFactory();
             BindGameStateMachine();
-            BindUIFactory();
-            BindLevelFactory();
             BindAssetContainerWithLoader();
+            BindLevelProgressService();
             BindLevelChangerService();
-            BindLevelDataProviderService();
+            BindLevelSettingsProviderService();
 
             this.Log("Completed bind game services");
         }
-
+        
         private void BindInputService() => Container
             .BindInterfacesTo<InputService>()
             .AsSingle();
@@ -53,7 +51,8 @@ namespace Project.Infrastructure.Installers.Project
 
         private void BindStateFactory() => Container
             .BindInterfacesTo<StateFactory>()
-            .AsSingle();
+            .AsSingle()
+            .CopyIntoDirectSubContainers();
 
         private void BindProgressService() => Container
             .BindInterfacesTo<PersistentProgressService>()
@@ -66,17 +65,7 @@ namespace Project.Infrastructure.Installers.Project
         private void BindGameStateMachine() => Container
             .BindInterfacesTo<GameStateMachine>()
             .AsSingle();
-
-        private void BindUIFactory() => Container
-            .BindInterfacesTo<UIFactory>()
-            .AsSingle()
-            .CopyIntoAllSubContainers();
-
-        private void BindLevelFactory() => Container
-            .BindInterfacesTo<LevelFactory>()
-            .AsSingle()
-            .CopyIntoAllSubContainers();
-
+        
         private void BindAssetContainerWithLoader()
         {
             var assetContainer = new AssetContainer();
@@ -95,8 +84,14 @@ namespace Project.Infrastructure.Installers.Project
             .BindInterfacesTo<LevelChanger>()
             .AsSingle();
 
-        private void BindLevelDataProviderService() => Container
+        private void BindLevelSettingsProviderService() => Container
             .BindInterfacesTo<LevelSettingsProvider>()
-            .AsSingle();
+            .AsSingle()
+            .NonLazy();
+
+        private void BindLevelProgressService() => Container
+            .BindInterfacesTo<LevelProgressService>()
+            .AsSingle()
+            .NonLazy();
     }
 }

@@ -8,6 +8,8 @@ namespace Project.Services.LevelServices.LevelSettingsProvider.Data
         [Header("Levels")]
         [SerializeField] private LevelConfig[] levels;
 
+        public int TotalLevels => levels.Length;
+
 #if UNITY_EDITOR
         private void OnValidate()
         {

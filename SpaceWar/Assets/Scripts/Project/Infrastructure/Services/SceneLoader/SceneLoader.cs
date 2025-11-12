@@ -20,8 +20,7 @@ namespace Project.Infrastructure.Services.SceneLoader
         {
             this.Log($"Start loading the {sceneID} scene");
 
-            var asyncOperation = SceneManager.LoadSceneAsync((int)sceneID);
-            await UniTask.WaitUntil(() => asyncOperation?.isDone ?? true);
+            await SceneManager.LoadSceneAsync((int)sceneID).ToUniTask();
             
             this.Log($"Finished loading the {sceneID} scene");
             onLoadedAction?.Invoke();

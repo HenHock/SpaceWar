@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Project.Infrastructure.Services.AssetManagement.Data;
+﻿using Project.Infrastructure.Services.AssetManagement.Data;
 using Project.Logic.Asteroid.Data;
 using Project.Logic.Asteroid.StaticData;
-using Project.Logic.Behavior;
 using Project.Logic.Behavior.Damageable;
 using Project.Logic.Behavior.Death___Life;
 using Project.Logic.Behavior.Hittable;
@@ -36,7 +33,7 @@ namespace Project.Logic.Asteroid
         private AsteroidViewConfig _viewConfig;
         private AsteroidBalanceConfig _balanceConfig;
 
-        public event Action<AsteroidBrain> OnReleased;
+        public Subject<AsteroidBrain> OnReleased;
         
         private void Awake()
         {
@@ -54,7 +51,7 @@ namespace Project.Logic.Asteroid
 
         public void Initialize(AsteroidType asteroidType)
         {
-            OnReleased = null;
+            OnReleased = new Subject<AsteroidBrain>();
 
             AsteroidStats stats = AsteroidBalancer.GetStats(_balanceConfig, asteroidType);
 
@@ -71,7 +68,7 @@ namespace Project.Logic.Asteroid
         private void Release()
         {
             triggerObserver.SetTrigger(false);
-            OnReleased?.Invoke(this);
+            OnReleased?.OnNext(this);
         }
     }
 }

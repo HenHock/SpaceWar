@@ -38,8 +38,28 @@ MonoBehaviour:
     AsteroidSpawnCount:
       IsGenerated: 1
       PredefinedValue: 0
-      MinMaxValue: {x: 25, y: 50}
+      MinMaxValue: {x: 35, y: 50}
     AsteroidSpawnInterval:
       IsGenerated: 1
       PredefinedValue: 0
       MinMaxValue: {x: 0.8, y: 1}
+  - Name: Level 4
+    AsteroidTypes: -1
+    AsteroidSpawnCount:
+      IsGenerated: 1
+      PredefinedValue: 0
+      MinMaxValue: {x: 50, y: 75}
+    AsteroidSpawnInterval:
+      IsGenerated: 1
+      PredefinedValue: 0
+      MinMaxValue: {x: 0.75, y: 1}
+  - Name: Level 5
+    AsteroidTypes: -1
+    AsteroidSpawnCount:
+      IsGenerated: 1
+      PredefinedValue: 0
+      MinMaxValue: {x: 80, y: 120}
+    AsteroidSpawnInterval:
+      IsGenerated: 1
+      PredefinedValue: 0
+      MinMaxValue: {x: 0.6, y: 0.85}

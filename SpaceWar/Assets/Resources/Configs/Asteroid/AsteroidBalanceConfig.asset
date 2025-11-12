@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AsteroidBalanceConfig
   m_EditorClassIdentifier: Assembly-CSharp::Project.Logic.Asteroid.Data.AsteroidBalanceConfig
   BaseLifeTime: 2.5
-  BaseSpeed: 15
+  BaseSpeed: 30
   BaseScale: 0.6
   LifeTimeExponent: 1
   SpeedExponent: 1

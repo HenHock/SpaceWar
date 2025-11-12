@@ -1,4 +1,7 @@
 namespace Project.Infrastructure.BootStateMachine
 {
-    public interface IGameStateMachine : IStateMachine {}
+    public interface IGameStateMachine : IStateMachine
+    {
+        
+    }
 }

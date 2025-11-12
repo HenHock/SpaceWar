@@ -2,6 +2,7 @@
 using Project.Infrastructure.Services.AssetManagement.Data;
 using Project.Logic.Asteroid;
 using Project.Logic.Asteroid.Data;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -11,6 +12,8 @@ namespace Project.Services.AsteroidServices.Factory
     {
         private readonly IInstantiator _instantiator;
         private readonly MonoPool<AsteroidBrain> _asteroidPool;
+
+        public bool IsAllAsteroidsInPool => _asteroidPool.CountInactive == _asteroidPool.CountAll;
         
         private Camera _camera;
 
@@ -30,11 +33,13 @@ namespace Project.Services.AsteroidServices.Factory
             _asteroidPool.Clear();
         }
 
+        public void ReturnToPool(AsteroidBrain asteroid) => _asteroidPool.Release(asteroid);
+
         public AsteroidBrain SpawnAsteroid(AsteroidType asteroidType)
         {
             AsteroidBrain asteroid = _asteroidPool.Get();
             asteroid.Initialize(asteroidType);
-            asteroid.OnReleased += ReturnToPool;
+            asteroid.OnReleased.Subscribe(ReturnToPool);
             asteroid.transform.position = GetSpawnPosition(asteroid);
             
             return asteroid;
@@ -70,8 +75,6 @@ namespace Project.Services.AsteroidServices.Factory
 
             return Random.Range(leftThreshold, rightThreshold);
         }
-
-        private void ReturnToPool(AsteroidBrain asteroid) => _asteroidPool.Release(asteroid);
 
         private MonoPool<AsteroidBrain> CreateAsteroidPool(GameObject prefab)
         {

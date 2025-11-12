@@ -7,5 +7,7 @@ namespace Project.Services.AsteroidServices.Factory
     public interface IAsteroidFactory : IDisposable
     {
         AsteroidBrain SpawnAsteroid(AsteroidType asteroidType);
+        void ReturnToPool(AsteroidBrain asteroid);
+        bool IsAllAsteroidsInPool { get; }
     }
 }

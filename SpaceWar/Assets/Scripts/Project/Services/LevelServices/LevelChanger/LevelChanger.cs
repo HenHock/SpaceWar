@@ -1,23 +1,22 @@
 ﻿using Project.Infrastructure.BootStateMachine;
-using Project.Infrastructure.Models;
+using Project.Services.LevelServices.LevelChanger.Model;
 
 namespace Project.Services.LevelServices.LevelChanger
 {
     public class LevelChanger : ILevelChanger
     {
-        private readonly GameplayModel _model;
+        private readonly LevelSetupModel _setupModel;
         private readonly IGameStateMachine _stateMachine;
 
-        public LevelChanger(IGameStateMachine stateMachine, GameplayModel model)
+        public LevelChanger(IGameStateMachine stateMachine, LevelSetupModel setupModel)
         {
-            _model = model;
+            _setupModel = setupModel;
             _stateMachine = stateMachine;
         }
         
         public void ChangeLevel(int selectedLevelIndex)
         {
-            _model.SelectedLevelIndex = selectedLevelIndex;
-            
+            _setupModel.LevelIndex = selectedLevelIndex;
             _stateMachine.CurrentState.Value.Next();
         }
     }

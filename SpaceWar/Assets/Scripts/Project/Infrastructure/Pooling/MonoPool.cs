@@ -49,6 +49,10 @@ namespace Project.Infrastructure.Pooling
                 maxSize: Mathf.Max(1, maxSize));
         }
 
+        public int CountAll => _pool.CountAll;
+        public int CountActive => _pool.CountActive;
+        public int CountInactive => _pool.CountInactive;
+
         /// <summary>
         /// Acquire an instance from the pool.
         /// </summary>

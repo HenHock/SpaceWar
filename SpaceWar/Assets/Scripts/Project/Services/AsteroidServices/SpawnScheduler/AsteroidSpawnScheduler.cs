@@ -5,11 +5,13 @@ using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Project.Extensions;
+using Project.Infrastructure.BootStateMachine;
 using Project.Infrastructure.Logger;
-using Project.Infrastructure.Models;
 using Project.Infrastructure.Services.AssetManagement.Data;
+using Project.Logic.Asteroid;
 using Project.Logic.Asteroid.Data;
 using Project.Services.AsteroidServices.Factory;
+using Project.Services.LevelServices.LevelChanger.Model;
 using Project.Services.LevelServices.LevelSettingsProvider;
 using Project.Services.LevelServices.LevelSettingsProvider.Data;
 using UniRx;
@@ -24,25 +26,29 @@ namespace Project.Services.AsteroidServices.SpawnScheduler
         
         private static readonly AsteroidType[] PossibleValuesArray = (AsteroidType[])Enum.GetValues(typeof(AsteroidType));
         
-        private readonly IAsteroidFactory _factory;
         private readonly LevelConfig _levelConfig;
+        private readonly IAsteroidFactory _factory;
         private readonly LevelSettings _levelSettings;
         private readonly CancellationToken _stopSpawnToken;
-        
+        private readonly IGameStateMachine _gameStateMachine;
+
+        private int _spawnedAsteroidsCount = 0;
 
         public AsteroidSpawnScheduler
         (
             IAsteroidFactory factory,
-            IGameplayModel gameplayModel,
+            ILevelSetupModel levelSetupModel,
             CancellationToken stopSpawnToken,
+            IGameStateMachine gameStateMachine,
             IReadAssetContainer assetContainer,
             ILevelSettingsProvider levelSettingsProvider
         )
         {
             _factory = factory;
             _stopSpawnToken = stopSpawnToken;
-            _levelSettings = levelSettingsProvider.GetLevelSettings(gameplayModel.SelectedLevelIndex);
-            _levelConfig = assetContainer.GetConfig<LevelsConfig>().GetLevelConfig(gameplayModel.SelectedLevelIndex);
+            _gameStateMachine = gameStateMachine;
+            _levelSettings = levelSettingsProvider.GetLevelSettings(levelSetupModel.LevelIndex);
+            _levelConfig = assetContainer.GetConfig<LevelsConfig>().GetLevelConfig(levelSetupModel.LevelIndex);
         }
 
         public void Initialize()
@@ -52,18 +58,25 @@ namespace Project.Services.AsteroidServices.SpawnScheduler
                 .Subscribe(SpawnAsteroid)
                 .AddTo(_stopSpawnToken);
             
-            this.Log("Initialized asteroid spawn scheduler.");
+            this.Log($"Initialized asteroid spawn scheduler.");
         }
 
         private void SpawnAsteroid(long _)
         {
-            AsteroidType mask = _levelConfig.AsteroidTypes;
-            AsteroidType rndAsteroid = GetRandomAsteroidType(mask, PossibleValuesArray);
-            
-            _factory.SpawnAsteroid(rndAsteroid);
+            if (_spawnedAsteroidsCount++ < _levelSettings.AsteroidSpawnCount)
+            {
+                AsteroidType mask = _levelConfig.AsteroidTypes;
+                AsteroidType rndAsteroid = GetRandomAsteroidType(mask, PossibleValuesArray);
+
+                _factory.SpawnAsteroid(rndAsteroid);
+            }
+            else if (IsAllAsteroidsReleased()) 
+                GoToNextGameState();
         }
 
-        
+        private void GoToNextGameState() => _gameStateMachine.CurrentState.Value.Next();
+        private bool IsAllAsteroidsReleased() => _factory.IsAllAsteroidsInPool;
+
         /// <summary>
         /// Get random asteroid type from level config mask if enum has [Flags]
         /// </summary>

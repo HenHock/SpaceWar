@@ -41,7 +41,6 @@ namespace Project.Infrastructure
             _gameStateMachine.RegisterState(_stateFactory.Create<MenuLoopState>());
             
             _gameStateMachine.RegisterState(_stateFactory.Create<LoadGameplayState>());
-            _gameStateMachine.RegisterState(_stateFactory.Create<GameplayLoopState>());
 
             this.Log("Initialized GameStateMachine");
 

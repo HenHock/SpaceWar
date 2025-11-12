@@ -13,14 +13,12 @@ namespace Project.Infrastructure.Services.AssetManagement.AssetBundles.GameplayB
         public override void Load()
         {
             AddConfig<PlayerConfig>(AssetPaths.PlayerConfig);
-            AddConfig<LevelsConfig>(AssetPaths.LevelsConfig);
             AddConfig<AsteroidViewConfig>(AssetPaths.AsteroidViewConfig);
             AddConfig<AsteroidBalanceConfig>(AssetPaths.AsteroidBalanceConfig);
         }
 
         public override void Unload()
         {
-            RemoveConfig<LevelsConfig>();
             RemoveConfig<PlayerConfig>();
             RemoveConfig<AsteroidViewConfig>();
             RemoveConfig<AsteroidBalanceConfig>();

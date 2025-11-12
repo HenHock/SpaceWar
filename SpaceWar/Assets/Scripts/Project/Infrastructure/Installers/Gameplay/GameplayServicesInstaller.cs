@@ -1,7 +1,12 @@
 using System.Threading;
 using Project.Extensions;
+using Project.Infrastructure.BootStateMachine;
+using Project.Infrastructure.BootStateMachine.StateFactory;
 using Project.Services.AsteroidServices.Factory;
 using Project.Services.AsteroidServices.SpawnScheduler;
+using Project.Services.LevelServices.Factory;
+using Project.Services.LevelServices.LevelSettingsProvider;
+using Project.Services.Pause;
 using UnityEngine;
 using Zenject;
 using ILogger = Project.Infrastructure.Logger.ILogger;
@@ -13,12 +18,15 @@ namespace Project.Infrastructure.Installers.Gameplay
     /// </summary>
     public class GameplayServicesInstaller : MonoInstaller, ILogger
     {
+        public bool IsActiveLogger => true;
         public Color DefaultColor => Color.green;
-        
+
         public override void InstallBindings()
         {
             this.Log("Start bind gameplay services");
-            
+
+            BindPauseService();
+            BindLevelFactory();
             BindAsteroidFactory();
             BindAsteroidSpawnScheduler();
             BindUnloadSceneCancellationToken();
@@ -38,5 +46,14 @@ namespace Project.Infrastructure.Installers.Gameplay
         private void BindAsteroidFactory() => Container
             .BindInterfacesTo<AsteroidFactory>()
             .AsSingle();
+
+        private void BindPauseService() => Container
+            .BindInterfacesTo<PauseService>()
+            .AsSingle();
+
+        private void BindLevelFactory() => Container
+            .BindInterfacesTo<LevelFactory>()
+            .AsSingle();
+        
     }
 }

@@ -1,10 +1,12 @@
-﻿using Project.Services.LevelServices.LevelSettingsProvider.Extensions;
+﻿using System;
+using Project.Services.LevelServices.LevelSettingsProvider.Extensions;
 
 namespace Project.Services.LevelServices.LevelSettingsProvider.Data
 {
     /// <summary>
     /// A struct to hold generated data related to a level.
     /// </summary>
+    [Serializable]
     public readonly struct LevelSettings
     {
         public readonly int AsteroidSpawnCount;
@@ -17,7 +19,7 @@ namespace Project.Services.LevelServices.LevelSettingsProvider.Data
         }
 
         /// <summary>
-        /// Returns true if the current LevelData matches the provided LevelConfig.
+        /// Returns true if the current <see cref="LevelSettings"/> matches the provided <see cref="LevelConfig"/>
         /// </summary>
         public bool IsEqual(LevelConfig levelConfig) =>
             this.IsValid(AsteroidSpawnCount, levelConfig.AsteroidSpawnCount) &&

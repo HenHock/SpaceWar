@@ -2,6 +2,6 @@
 {
     public interface ILevelFactory
     {
-        void CreateLevel(int levelIndex);
+        void CreateLevel();
     }
 }

@@ -22,6 +22,8 @@ namespace Project.Infrastructure.BootStateMachine.States
         public void Enter()
         {
             _saveLoadService.Load();
+            // _saveLoadService.InformProgressReader();
+            
             Next();
         }
 
