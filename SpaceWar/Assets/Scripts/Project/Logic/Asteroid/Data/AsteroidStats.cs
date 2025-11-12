@@ -1,10 +1,10 @@
 ﻿namespace Project.Logic.Asteroid.Data
 {
-    public struct AsteroidStats
+    public readonly struct AsteroidStats
     {
-        public float Speed;
-        public float Scale;
-        public float Lifetime;
+        public readonly float Speed;
+        public readonly float Scale;
+        public readonly float Lifetime;
 
         public AsteroidStats(float speed, float scale, float lifetime)
         {
